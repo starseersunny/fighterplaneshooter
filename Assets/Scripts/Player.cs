@@ -60,12 +60,6 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
-
-        float yMove = Input.GetAxis("Vertical") * Time.deltaTime * playerSpeed;
-	    transform.Translate(0f, yMove, 0f);
-	    Vector3 clampedPosition = transform.position;
-	    clampedPosition.y = Mathf.Clamp(clampedPosition.y, -3.25f, 1f);
-	    transform.position = clampedPosition;
     }
 
 }
