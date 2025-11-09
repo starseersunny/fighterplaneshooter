@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
-        //Lucas Task 1
+        //Lucas Week 1 Task 1
         float yMove = Input.GetAxis("Vertical") * Time.deltaTime * playerSpeed;
         transform.Translate(0f, yMove, 0f);
         Vector3 clampedPosition = transform.position;
