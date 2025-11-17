@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject restartText;
     public GameObject powerupPrefab;
     public GameObject audioPlayer;
+    public GameObject coinPrefab;
+    public GameObject healthPrefab;
+    public int currentLives = 3;
 
     public AudioClip powerupSound;
     public AudioClip powerdownSound;
@@ -49,6 +52,8 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("CreateEnemyR", 3, 4);
         InvokeRepeating("CreateEnemyK", 5, 6);
         StartCoroutine(SpawnPowerup());
+        StartCoroutine(SpawnCoin());
+        StartCoroutine(SpawnHealth());
         powerupText.text = "No powerups yet!";
     }
 
@@ -80,9 +85,22 @@ public class GameManager : MonoBehaviour
         0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
 
+    // Kaitlyn Week 2 Task 3
+    void CreateHealth()
+    {
+        Instantiate(healthPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), 
+        Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
+    }
+
     void CreatePowerup()
     {
         Instantiate(powerupPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
+    }
+
+    // Rachel Week 2 Task 2
+    void CreateCoin()
+    {
+        Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
     }
 
     void CreateSky()
@@ -124,6 +142,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnPowerup());
     }
 
+    // Rachel Week 2 Task 2
+    IEnumerator SpawnCoin()
+    {
+        float spawnTime = Random.Range(3, 5);
+        yield return new WaitForSeconds(spawnTime);
+        CreateCoin();
+        StartCoroutine(SpawnCoin());
+    }
+
+    // Kaitlyn Week 2 Task 2
+    IEnumerator SpawnHealth()
+    {
+        float spawnTime = Random.Range(4, 7);
+        yield return new WaitForSeconds(spawnTime);
+        CreateHealth();
+        StartCoroutine(SpawnHealth());
+    } 
+
     public void PlaySound(int whichSound)
     {
         switch (whichSound)
@@ -137,15 +173,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Lucas Week 2 Task 1
     public void AddScore(int earnedScore)
     {
-        score = score + earnedScore;
+        score += earnedScore;
+
+        if(scoreText != null)
         scoreText.text = "Score: " + score;
     }
 
     public void ChangeLivesText (int currentLives)
     {
         livesText.text = "Lives: " + currentLives;
+    }
+
+    // Kaitlyn Week 2 Task 3
+    public void AddLives(int amount)
+    {
+        currentLives += amount;
+        
+        if (currentLives> 3)
+        currentLives = 3;
+        if (currentLives < 0)
+        currentLives = 0;
+        
+        ChangeLivesText(currentLives);
     }
 
     public void GameOver()

@@ -42,8 +42,9 @@ public class PlayerController : MonoBehaviour
         //If not: lose a life
         //lives = lives - 1;
         //lives -= 1;
-        lives--;
-        gameManager.ChangeLivesText(lives);
+        gameManager.AddLives(-1);
+        lives = gameManager.currentLives;
+        gameManager.currentLives = lives;
         if (lives == 0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);

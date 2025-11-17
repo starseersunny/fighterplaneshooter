@@ -35,7 +35,7 @@ public class EnemyK : MonoBehaviour
         {
             Destroy(whatDidIHit.gameObject);
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            gameManager.AddScore(5);
+            gameManager.AddScore(7);
             Destroy(this.gameObject);
         }
     }

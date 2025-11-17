@@ -157,6 +157,9 @@ MonoBehaviour:
   restartText: {fileID: 242308751}
   powerupPrefab: {fileID: 7115967532009685895, guid: c119aaa292ebc134cbba3b4a20748972, type: 3}
   audioPlayer: {fileID: 1139858143}
+  coinPrefab: {fileID: 7403168637622367855, guid: 768ba4c9d6500be42b2726a2e4a9e1be, type: 3}
+  healthPrefab: {fileID: 7091051681146454839, guid: 83b19cd6c2d1e7a4d893913689811335, type: 3}
+  currentLives: 3
   powerupSound: {fileID: 8300000, guid: 752ca85f206f14146942c3fcafbdd492, type: 3}
   powerdownSound: {fileID: 8300000, guid: 86237706879f3c44db594d2c5cb1f7b3, type: 3}
   livesText: {fileID: 999943548}
