@@ -1,2 +1,2 @@
 # fighterplaneshooter
-Made by Lucas Singer, Rachel Lee, and Kaitlyn Mattingly
+Made by Lucas Signer, Rachel Lee, and Kaitlyn Mattingly
