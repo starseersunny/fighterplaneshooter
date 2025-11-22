@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public AudioClip powerupSound;
     public AudioClip powerdownSound;
+    public AudioClip coinSound;
+    public AudioClip gainlifeSound;
 
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
@@ -160,6 +162,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnHealth());
     } 
 
+    // Rachel added the coin sound support, Lucas added the Life sound support
     public void PlaySound(int whichSound)
     {
         switch (whichSound)
@@ -169,6 +172,12 @@ public class GameManager : MonoBehaviour
                 break;
             case 2:
                 audioPlayer.GetComponent<AudioSource>().PlayOneShot(powerdownSound);
+                break;
+            case 3:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(coinSound);
+                break;
+            case 4:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(gainlifeSound);
                 break;
         }
     }
