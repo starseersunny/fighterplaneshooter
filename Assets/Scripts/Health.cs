@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            gameManager.PlaySound(4);
             gameManager.AddLives(1);
             Destroy(gameObject);
         }

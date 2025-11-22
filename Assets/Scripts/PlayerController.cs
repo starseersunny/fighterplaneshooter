@@ -35,16 +35,21 @@ public class PlayerController : MonoBehaviour
         Movement();
         Shooting();
     }
-
+    //Kaitlyn contributed towards everything to do with the shield in this file.
     public void LoseALife()
     {
         //Do I have a shield? If yes: do not lose a life, but instead deactivate the shield's visibility
         //If not: lose a life
-        //lives = lives - 1;
-        //lives -= 1;
-        gameManager.AddLives(-1);
-        lives = gameManager.currentLives;
-        gameManager.currentLives = lives;
+        if (shieldPrefab.activeInHierarchy)
+        {
+            shieldPrefab.SetActive(false);  
+            StopCoroutine(ShieldPowerDown()); 
+            gameManager.ManagePowerupText(0);      
+            return;                          
+        }
+            gameManager.AddLives(-1);
+            lives = gameManager.currentLives;
+            gameManager.currentLives = lives;
         if (lives == 0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -66,6 +71,14 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         weaponType = 1;
+        gameManager.ManagePowerupText(0);
+        gameManager.PlaySound(2);
+    }
+
+    IEnumerator ShieldPowerDown()
+    {
+        yield return new WaitForSeconds(3f);
+        shieldPrefab.SetActive(false);
         gameManager.ManagePowerupText(0);
         gameManager.PlaySound(2);
     }
@@ -101,7 +114,17 @@ public class PlayerController : MonoBehaviour
                     //Do I already have a shield?
                     //If yes: do nothing
                     //If not: activate the shield's visibility
-                    gameManager.ManagePowerupText(4);
+                    if (!shieldPrefab.activeInHierarchy)
+                    {
+                        StartCoroutine(ShieldPowerDown());
+                        shieldPrefab.SetActive(true);
+                        gameManager.ManagePowerupText(4);
+
+                    }
+                    else
+                    {
+                        //do nothing
+                    }
                     break;
             }
         }
